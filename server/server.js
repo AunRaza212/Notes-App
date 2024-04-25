@@ -23,7 +23,9 @@ app.use(cors({origin:true,credentials:true}))
 connectToDb();
 
 //Authentication Routing
-
+app.post('/', (req, res) => {
+  res.send('Hello, world!');
+});
 app.post('/signup',usersController.signup)
 app.post('/login',usersController.login)
 app.get('/logout',usersController.logout)
