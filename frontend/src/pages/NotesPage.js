@@ -17,7 +17,7 @@ const NotesPage = () => {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/notes");
+        const response = await axios.get("/notes");
         setNotes(response.data.notes);
       } catch (error) {
         console.error("Error fetching notes:", error);
@@ -34,7 +34,7 @@ const NotesPage = () => {
   const createNote = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3000/notes", createForm);
+      const res = await axios.post("/notes", createForm);
       setNotes([...notes, res.data.note]);
       setCreateForm({ title: "", body: "" });
     } catch (error) {
@@ -44,7 +44,7 @@ const NotesPage = () => {
 
   const deleteNote = async (_id) => {
     try {
-      await axios.delete(`http://localhost:3000/notes/${_id}`);
+      await axios.delete(`/notes/${_id}`);
       const newNotes = notes.filter((note) => note._id !== _id);
       setNotes(newNotes);
     } catch (error) {
@@ -66,7 +66,7 @@ const NotesPage = () => {
     try {
       const { title, body } = updateForm;
       const res = await axios.put(
-        `http://localhost:3000/notes/${updateForm._id}`,
+        `/notes/${updateForm._id}`,
         { title, body }
       );
       const newNotes = [...notes];
